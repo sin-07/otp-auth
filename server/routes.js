@@ -61,21 +61,21 @@ router.post("/forgot", async (req, res) => {
   try {
     const genrateOtp = Math.floor(Math.random() * 10000);
 
-    // Looking to send emails in production? Check out our Email API/SMTP product!
     var transporter = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
+      // host: "sandbox.smtp.mailtrap.io",
+      // port: 2525,
+      service: "gmail",
       auth: {
-        user: "3a19fea220a3f7",
-        pass: "dae98982017e48",
+        user: "aniket.singh07vs@gmail.com",
+        pass: "fidmnumrlsgcjfvm",
       },
     });
 
     const info = await transporter.sendMail({
-      from: "vs.aniket@gmail.com", // sender address
-      to: email, // list of receivers
-      subject: "New OTP Generated", // Subject line
-      html: `<b>OTP is : <i>${genrateOtp}</i></b>`, // html body
+      from: '"Maddison Foo👻" <aniket.singh07vs@gmail.com>', 
+      to: email, 
+      subject: "New OTP Generated", 
+      html: `<b>OTP is : <i>${genrateOtp}</i></b>`, 
     });
 
     if (info.messageId) {
@@ -111,19 +111,9 @@ router.post("/verify", async (req, res) => {
     );
 
     return res.status(200).json({ message: "Password updated successfully" });
-
-    
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 });
-
-
-
-
-
-
-
-
 
 module.exports = router;
